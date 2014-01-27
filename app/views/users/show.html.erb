@@ -24,11 +24,13 @@
   <input type="submit" value="Create Circle">
 </form>
 
+<% @friend_circles.each do |circle| %>
+  <p><%= link_to circle.name, user_friend_circle_url(circle.id) %></p>
+
+<% end %>
 <%= render @friend_circles %>
 
-<h2>POSTS:</h2>
-
-<h2>Add New Post</h2>
+<h3>Add New Post</h3>
 <form action="<%= posts_url %>" method="post">
   <%= auth %>
 
@@ -57,5 +59,7 @@
   <input type="submit" value="Create Post">
 </form>
 
+<br>
+<h4>POSTS:</h4>
 
-<%= render @posts %>
+<%= render @user.authored_posts %>

@@ -23,14 +23,16 @@ class Post < ActiveRecord::Base
     :links,
     class_name: "Link",
     foreign_key: :post_id,
-    primary_key: :id
+    primary_key: :id,
+    inverse_of: :post
   )
 
   has_many(
     :post_shares,
     class_name: "PostShare",
     foreign_key: :post_id,
-    primary_key: :id
+    primary_key: :id,
+    inverse_of: :post
   )
 
   has_many(

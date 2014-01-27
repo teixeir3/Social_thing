@@ -1,0 +1,9 @@
+<h1> <%= "#{@circle.owner.email}'s Circle: #{@circle.name}" %> </h1>
+
+<h3> Members </h3>
+  <% @members.each do |member| %>
+    <p><%= member.email%></p>
+
+  <% end %>
+
+  <p><%= link_to "Edit #{@circle.name}", edit_user_friend_circle_url(@circle) %></p>

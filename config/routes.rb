@@ -7,9 +7,9 @@ SocialThing::Application.routes.draw do
   post 'session/create', to: 'sessions#create', as: 'signin'
   delete 'session/destroy', to: 'sessions#destroy', as: 'signout'
 
-  resources :users do
-    resources :friend_circles
-  end
+  resources :users
+
+  resources :friend_circles
   resources :posts
 
   # The priority is based upon order of creation:

@@ -12,6 +12,17 @@ class FriendCirclesController < ApplicationController
   end
 
   def edit
+    @circle = FriendCircle.find(params[:user_id])
+    @user = @circle.owner
+  end
 
+  def show
+    @circle = FriendCircle.find(params[:user_id])
+    @members = @circle.members
+  end
+
+  def update
+
+    render :show
   end
 end
