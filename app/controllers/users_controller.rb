@@ -30,7 +30,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update_attributes(params[:user])
-      signin(@user)
       redirect_to user_url(@user)
     else
       flash[:notice] = @user.errors.full_messages
@@ -44,7 +43,6 @@ class UsersController < ApplicationController
 
 
     if @token == @user.email_token
-      signin(@user)
       redirect_to edit_user_url(@user)
     else
       flash[:notice] = "AN ERROR OCCURED"

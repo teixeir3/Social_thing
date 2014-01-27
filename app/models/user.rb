@@ -28,38 +28,38 @@ class User < ActiveRecord::Base
   has_many :circles, through: :memberships, source: :friend_circle
 
 
-  def reset_session_token
-    self.session_token = SecureRandom::urlsafe_base64(16)
-  end
-
-  def reset_session_token!
-    self.session_token = SecureRandom::urlsafe_base64(16)
-    self.save
-  end
-
-  def reset_email_token!
-    self.email_token = SecureRandom::urlsafe_base64(16)
-    self.save
-
-    self.email_token
-  end
-
   def password=(secret)
-    @password = secret
-    self.password_digest = BCrypt::Password.create(secret)
-  end
+      @password = secret
+      self.password_digest = BCrypt::Password.create(secret)
+    end
 
-  def self.find_by_credentials(email, secret)
-    user = User.find_by_email(email)
-    return nil if user.nil?
-    BCrypt::Password.new(user.password_digest).is_password?(secret) ? user : nil
-  end
+    def is_password?(secret)
+        BCrypt::Password.new(self.password_digest).is_password?(secret)
+    end
 
-  def reset_password
+    def reset_session_token!
+      self.session_token = self.class.generate_session_token
+      self.save!
+    end
 
-  end
 
-  def ensure_session_token
-    self.session_token ||= self.reset_session_token
-  end
+    def self.generate_session_token
+      SecureRandom.urlsafe_base64(16)
+    end
+
+    def generate_activation_token
+      self.activation_token = SecureRandom.urlsafe_base64(16)
+    end
+
+    def self.find_by_credentials(email, secret)
+      current_user = User.find_by_email(email)
+
+      return nil unless current_user
+      current_user.is_password?(secret) ? current_user : nil
+
+    end
+
+    def ensure_session_token
+      self.session_token ||= User.generate_session_token
+    end
 end
