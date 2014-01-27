@@ -1,0 +1,16 @@
+
+<% if params[:controller] == "users" %>
+  <% path, button_name = users_url, "Sign Up" %>
+<% elsif params[:controller] == "sessions" %>
+  <% path, button_name = signin_url, "Sign In" %>
+<% end %>
+
+
+<form action="<%= path %>" method="POST">
+  <% auth %>
+
+  <p><label>Enter Email:<input type="text" name="user[email]"></label></p>
+  <p><label>Enter Password:<input type="password" name="user[password]"></label></p>
+
+  <input type="submit" value="<%= button_name %>">
+</form>

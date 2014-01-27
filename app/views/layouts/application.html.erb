@@ -8,6 +8,21 @@
 </head>
 <body>
 
+  <%= debug params %>
+
+  <% if flash[:notice] %>
+    <% flash[:notice].each do |notice| %>
+   <p> <%= notice %> </p>
+    <%end%>
+  <%end%>
+
+  <% if current_user.nil? %>
+    <p> <%= link_to "Sign In", login_url %></p>
+  <% else %>
+    <p>Signed in as: <%= current_user.email %> </p>
+    <p> <%= button_to "Sign Out", signout_url, method: "delete" %></p>
+  <% end %>
+
 <%= yield %>
 
 </body>

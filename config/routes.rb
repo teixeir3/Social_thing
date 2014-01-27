@@ -1,4 +1,11 @@
 SocialThing::Application.routes.draw do
+
+  get 'session/new', to: 'sessions#new', as: 'login'
+  post 'session/create', to: 'sessions#create', as: 'signin'
+  delete 'session/destroy', to: 'sessions#destroy', as: 'signout'
+
+  resources :users
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
