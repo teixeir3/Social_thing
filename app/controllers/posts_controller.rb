@@ -9,7 +9,6 @@ class PostsController < ApplicationController
     @post.author_id = current_user.id
     @post.links.new(params[:link].values)
     @post.post_shares.new(params[:post_share].values)
-    fail
     @post.save
 
 

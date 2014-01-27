@@ -10,4 +10,8 @@ class FriendCirclesController < ApplicationController
 
     redirect_to user_url(@user)
   end
+
+  def edit
+
+  end
 end
