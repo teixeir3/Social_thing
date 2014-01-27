@@ -1,2 +1,12 @@
 <h1> Sign In </h1>
 <%= render 'form' %>
+
+Forgot your password?
+
+<form action="<%= send_password_email_url %>" method="POST">
+  <% auth %>
+
+  <p><label>Enter Email:<input type="text" name="user[email]"></label></p>
+
+  <input type="submit" value="Send Reset Email">
+</form>

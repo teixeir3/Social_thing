@@ -1,7 +1,7 @@
 module SessionsHelper
   def current_user
     return nil if session[:token].nil?
-    @current_user = User.find_by_session_token(session[:token])
+    @current_user ||= User.find_by_session_token(session[:token])
   end
 
   def signin(user)

@@ -1,10 +1,15 @@
 SocialThing::Application.routes.draw do
 
+  post 'users/send_password_email', to: 'users#send_password_email', as: 'send_password_email'
+  get 'users/reset_password', to: 'users#reset_password', as: 'reset_password'
+
   get 'session/new', to: 'sessions#new', as: 'login'
   post 'session/create', to: 'sessions#create', as: 'signin'
   delete 'session/destroy', to: 'sessions#destroy', as: 'signout'
 
-  resources :users
+  resources :users do
+    resources :friend_circles
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,2 +1,28 @@
 <h1>Profile Page for: <%= current_user.email %></h1>
 <p> user_id = <%= current_user.id %> </p>
+
+<h2>Add New Friend Circle</h2>
+<form action="<%= user_friend_circles_url(@user) %>" method="post">
+
+  <% auth %>
+
+  <label>Enter Friend Circle Name: <input type="text" name="friend_circle[name]"></label>
+
+  <% User.all.each do |user| %>
+    <%next if user == current_user %>
+    <% html_id = "user_friend_id_#{user.id}" %>
+    <p><input type="checkbox"
+            name="friend_circle[friends][]"
+            value="<%= user.id %>"
+            id="<%= html_id %>">
+    <label for="<%= html_id %>">
+      <%= user.email %>
+    </label></p>
+
+  <% end %>
+
+
+  <input type="submit" value="Create Circle">
+</form>
+
+<%= render @friend_circles %>

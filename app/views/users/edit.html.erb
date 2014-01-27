@@ -1,0 +1,15 @@
+<form action="<%= user_url(@user) %>" method="POST">
+  <% auth %>
+
+  <input type="hidden" name="_method" value="PUT">
+
+  <p><label>Enter Email:
+    <input type="text" name="user[email]" value="<%= @user && @user.email %>">
+  </label></p>
+
+  <p><label>Enter Password:
+    <input type="password" name="user[password]">
+  </label></p>
+
+  <input type="submit" value="Update">
+</form>
