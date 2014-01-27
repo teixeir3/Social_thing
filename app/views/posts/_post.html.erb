@@ -1,0 +1,7 @@
+<p><%= link_to post.body, post_url(post) %></p>
+
+<% if params[:controller] == "posts" %>
+  <% post.links.each do |link| %>
+    <p><%= link.url %></p>
+  <% end %>
+<% end %>

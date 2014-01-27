@@ -20,6 +20,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @friend_circles = @user.owned_circles
+    @posts = @user.authored_posts
+    @post = Post.new
+    3.times { @post.links.build }
   end
 
   def edit

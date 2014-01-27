@@ -3,8 +3,7 @@
 
 <h2>Add New Friend Circle</h2>
 <form action="<%= user_friend_circles_url(@user) %>" method="post">
-
-  <% auth %>
+  <%= auth %>
 
   <label>Enter Friend Circle Name: <input type="text" name="friend_circle[name]"></label>
 
@@ -26,3 +25,37 @@
 </form>
 
 <%= render @friend_circles %>
+
+<h2>POSTS:</h2>
+
+<h2>Add New Post</h2>
+<form action="<%= posts_url %>" method="post">
+  <%= auth %>
+
+  <input type="hidden" name="post[author_id]" value="<%= current_user.id %>">
+
+  <label>Body:
+    <textarea name="post[body]"></textarea>
+  </label>
+
+  <% @post.links.each_with_index do |link, i| %>
+    <p><label>
+          Link <%= i+1 %><input type="text" name="link[<%=i%>][url]">
+       </label>
+    </p>
+  <% end %>
+
+  <p><label>Which circles would you like to share this post with?
+    <% @friend_circles.each_with_index do |circle, i| %>
+      <p><label>
+            <%= circle.name %><input type="checkbox" name="post_share[<%=i%>][circle_id]" value="<%=circle.id%>">
+         </label>
+      </p>
+    <% end %>
+  </label></p>
+
+  <input type="submit" value="Create Post">
+</form>
+
+
+<%= render @posts %>
