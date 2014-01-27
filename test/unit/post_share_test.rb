@@ -1,17 +1,17 @@
 # == Schema Information
 #
-# Table name: posts
+# Table name: post_shares
 #
 #  id         :integer          not null, primary key
-#  author_id  :integer
-#  body       :string(255)
+#  post_id    :integer
+#  circle_id  :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 require 'test_helper'
 
-class PostTest < ActiveSupport::TestCase
+class PostShareTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
